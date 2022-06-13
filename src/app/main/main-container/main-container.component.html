@@ -1,0 +1,18 @@
+<block-ui name="main">
+  <app-navbar [authenticated]="isLoggedIn" (logout)="logOut()" (toggle)="toggleSidebar()"></app-navbar>
+  <section class="wrapper">
+    <nav class="sidebar shadow" *ngIf="isLoggedIn" #sidebar>
+      <ul class="nav flex-column flex-nowrap">
+        <li class="nav-item" *ngFor="let menu of menus" routerLinkActive="active" [authorize]="menu.privilege">
+          <a class="nav-link" routerLink="{{menu.route}}" (click)="closeSideBar()">
+            <i [ngClass]="menu.icon"></i> {{menu.label}}
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main class="main-content router-container" #content [@routeAnimations]="o.isActivated ? o.activatedRoute  : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
+    <div class="overlay" #overlay (click)="closeSideBar()"></div>
+  </section>
+</block-ui>

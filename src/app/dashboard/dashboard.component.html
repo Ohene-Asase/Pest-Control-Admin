@@ -1,0 +1,37 @@
+<div class="page" *blockUI="'dashboard'">
+  <div class="page-title">
+    <h5>Welcome, {{username}}</h5>
+    <p class="d-block text-muted">Here’s what’s happening with your business today.</p>
+    <hr>
+  </div>
+  <div class="mt-5">
+  
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th class="num_col_1">#</th>
+          <th>Customer Name</th>
+          <!-- <th>Phone Number</th> -->
+          <th>Location</th>
+          <th>Note</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+       
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of appointments; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{appointment.customerName}}</td>
+            <!-- <td >{{appointment.phoneNumber}}</td> -->
+            <td>{{appointment.location}}</td>
+            <td>{{appointment.note}}</td>
+            <td><span class="badge" [ngClass]="statusBadge(appointment.appointmentStatus)">{{appointment.appointmentStatus}}</span></td>
+            <td><button type="button" class="btn btn-secondary" (click)="approveAppointment(appointment.id)">Approve</button></td>
+            <td><button type="button" class="btn btn-dark" (click)="disapproveAppointment(appointment.id)">Reject</button></td>
+          </tr>
+        </tbody>
+      </table>
+    
+  </div>
+</div>
+

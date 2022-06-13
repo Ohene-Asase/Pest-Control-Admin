@@ -1,0 +1,12 @@
+<div class="page setup">
+    <ng-select style="width:300px;" class="pull-right" [items]="models" bindLabel="label" bindValue="name" [(ngModel)]="selectedModelId"
+        (ngModelChange)="openLookUp(selectedModelId)" placeholder="Select Model">
+    </ng-select>
+    <div class="page-title">
+        <h5>Application Settings</h5>
+        <p class="d-block text-muted">Configure application to fit your business process.</p>
+        <hr>
+    </div>
+    <br>
+    <router-outlet></router-outlet>
+</div>

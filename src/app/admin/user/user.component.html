@@ -1,0 +1,99 @@
+<div class="page">
+  <div class="page-title">
+    <h5>Manage Users</h5>
+    <p class="d-block text-muted">Create or modify application users..</p>
+    <hr>
+  </div>
+  <br>
+  <div class="grid-control">
+    <input type="text" class="form-control pull-right" [(ngModel)]="filter.text" placeholder="search...."
+      style="width: 200px">
+    <button class="btn btn-primary" (click)="openForm()"><i class="mdi mdi-account-plus"></i> Add User</button>
+  </div>
+  <div class="row no-gutters" *blockUI="'loading'">
+    <div class="col-md-4 side-form" *ngIf="showForm">
+      <div class="card">
+        <div class="card-body">
+          <button class="btn btn-link close-btn" data-toggle="tooltip" data-placement="top" title="Close Form"
+            (click)="closeForm()"><i class="mdi mdi-cancel"></i></button>
+          <h6 class="card-subtitle mb-2">Enter user details</h6>
+          <form [formGroup]="userForm" (ngSubmit)="save(userForm.value)">
+            <div class="mb-3">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" class="form-control" required id="username" formControlName="username"
+                [attr.disabled]="userForm.value.id" [validate-form-control]="userForm.controls.username"
+                error-message="Username is required">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <input type="text" class="form-control" required id="name" formControlName="name"
+                [validate-form-control]="userForm.controls.name" error-message="Name is required">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="phoneNumber">Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email">Email address</label>
+              <input type="email" class="form-control" formControlName="email" id="email"
+                ngvemail="userForm.controls.email" [validate-form-control]="userForm.controls.email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password" autocomplete="">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                [equalTo]="userForm.controls.password" [validate-form-control]="userForm.controls.confirmPassword"
+                autocomplete="">
+            </div>
+
+            <div class="mb-3">
+              <label>Role</label>
+              <ng-select [items]="roles" bindLabel="name" bindValue="id" formControlName="profileId" required
+                [validate-form-control]="userForm.controls.profileId">
+              </ng-select>
+            </div>
+
+            <button type="submit" class="btn btn-success me-2" [disabled]="!userForm.valid">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+            <button type="button" class="btn btn-danger pull-right" (click)="delete(userForm.value)"
+              *ngIf="userForm.value.id">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="showForm ? 'col-md-8' : 'col-md-12'" class="side-grid">
+      <div class="card">
+        <div class="card-body no-padding">
+          <div class="table-responsive-sm">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr class="teable-secondary">
+                  <th scope="col" class="num_col_1">#</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users;let i=index" class="pointer" (click)="openForm(user)">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{user.username}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.phoneNumber}}</td>
+                  <td>{{user.profileName}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

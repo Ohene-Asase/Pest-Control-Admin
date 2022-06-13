@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand fixed-top shadow-sm navbar-light bg-light p-0">
+  <div class="container-fluid">
+    <a class="navbar-brand">
+      <img src="../assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""> {{title}}
+      <button (click)="toggleSidebar()" class="btn btn-sm btn-link">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </a>
+
+    <ul class="navbar-nav ml-auto" *ngIf="authenticated">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle user-account" id="user-account-dropdown" role="button"
+          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="user-avatar">
+            <img [src]="user.image || '../assets/images/user.svg'" alt="">
+          </span>
+          <span class="account-summary d-none d-lg-block">
+            <span class="account-name">{{user.name}}</span>
+            <span class="account-description">{{user.role?.name}}</span>
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="user-account-dropdown">
+          <a class="dropdown-item" routerLink="profile/profileaccount">
+            <i class="far fa-lgb fa-user-circle"></i> Profile</a>
+          <a class="dropdown-item" routerLink="profile/changepassword">
+            <i class="fas fa-lgb fa-lock"></i> Change Password</a>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item pointer" (click)="signOut()">
+            <i class="fas fa-lgb fa-sign-out-alt"></i> Log Out</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

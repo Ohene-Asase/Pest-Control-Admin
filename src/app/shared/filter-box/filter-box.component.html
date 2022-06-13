@@ -1,0 +1,14 @@
+<div class="dropdown">
+    <button class="btn btn-light dropdown-toggle" [ngClass]="small ? 'btn-sm': ''" type="button" id="filter-dropdown"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{text || 'Search'}}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right filter-box" aria-labelledby="filter-dropdown">
+        <div class="px-2 py-1">
+            <div #filterElements>
+                <ng-content></ng-content>
+            </div>
+            <button type="button" (click)="search()" class="btn btn-block btn-info mt-2">Search</button>
+        </div>
+    </div>
+</div>

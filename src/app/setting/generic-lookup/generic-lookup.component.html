@@ -1,0 +1,58 @@
+<div>
+  <div class="grid-control">
+    <button class="btn btn-primary" (click)="openForm()"><i class="mdi mdi-account-plus"></i> Add
+      {{lookup.label}}</button>
+  </div>
+  <div class="row no-gutters" *blockUI="'loading'">
+    <div class="col-md-4 side-form" *ngIf="showForm">
+      <div class="card">
+        <div class="card-body">
+          <button class="btn btn-link close-btn" data-toggle="tooltip" data-placement="top" title="Close Form"
+            (click)="closeForm()"><i class="mdi mdi-cancel"></i></button>
+          <h6 class="card-subtitle mb-2">Enter details</h6>
+          <form [formGroup]="lookupForm" (ngSubmit)="save(lookupForm.value)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name" required
+                [validate-form-control]="lookupForm.controls.name">
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Description</label>
+              <textarea class="form-control" id="notes" rows="3" formControlName="notes"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+            <button type="button" class="btn btn-danger pull-right" (click)="delete(lookupForm.value)"
+              *ngIf="lookupForm.value.id">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="showForm ? 'col-md-8' : 'col-md-12'" class="side-grid">
+      <div class="card">
+        <div class="card-body no-padding">
+          <div class="table-responsive-sm">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th class="num_col_1">#</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of records; let i = index;" class="pointer" (click)="openForm(record)">
+                  <td>{{i+1}}</td>
+                  <td>{{record.name}}</td>
+                  <td>{{record.notes}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

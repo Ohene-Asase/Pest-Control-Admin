@@ -1,0 +1,26 @@
+<div class="login-page">
+  <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <div class="text-center mb-4">
+      <img class="mb-4" src="../../assets/images/logo.png" alt="" width="72" height="72">
+      <h1 class="h3 font-weight-normal">User Login</h1>
+      <p>Enter your username and password</p>
+    </div>
+
+    <div class="form-label-group">
+      <input type="text" id="username" class="form-control" placeholder="Username" formControlName="username"
+        [validate-form-control]="loginForm.controls.username" required>
+      <label for="username">Username</label>
+    </div>
+
+    <div class="form-label-group">
+      <input type="password" id="password" class="form-control" placeholder="Password" formControlName="password"
+        [validate-form-control]="loginForm.controls.password" required autocomplete="username">
+      <label for="password">Password</label>
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-primary" [btn-loading]="loading" loading-message="Logging In..." type="submit"
+        [disabled]="!loginForm.valid">Signin</button>
+    </div>
+    <p class="mt-2 mb-3 text-muted text-center">© DN Powered 2019</p>
+  </form>
+</div>

@@ -1,0 +1,68 @@
+<div class="page">
+  <ng-select style="width:300px;" class="pull-right" [items]="reports" bindLabel="title" bindValue="name"
+    [(ngModel)]="reportName" (ngModelChange)="selectReport(reportName)" placeholder="Select Report">
+  </ng-select>
+  <div class="page-title">
+    <h5>Reporting</h5>
+    <p class="d-block text-muted">Generate report with various filter parameters on your data.</p>
+    <hr>
+  </div>
+  <br>
+  <div class="card mb-2" *ngIf="report?.lookUps">
+    <div class="card-body p-1">
+      <div class="form-inline">
+        <b class="form-control mr-2" style="background-color: #f1f1f1;">Select Filter:</b>
+        <div class="form-group mr-2">
+          <ng-select style="width:200px;" [items]="report.lookUps" bindLabel="label" [(ngModel)]="newFilter">
+          </ng-select>
+        </div>
+        <div class="form-group mr-2" *ngIf="newFilter">
+          <input type="text" class="form-control" [(ngModel)]="newFilter.value" *ngIf="newFilter.type == 'text'">
+          <input type="number" step="any" class="form-control" [(ngModel)]="newFilter.value"
+            *ngIf="newFilter.type == 'number'">
+          <input type="date" class="form-control" [(ngModel)]="newFilter.value" *ngIf="newFilter.type == 'date'">
+          <div *ngIf="newFilter.type == 'select'">
+            <ng-select *ngIf="newFilter.id == newFilter.name" style="min-width:200px;" [items]="newFilter.source"
+              [(ngModel)]="newFilter.value">
+            </ng-select>
+            <ng-select *ngIf="newFilter.id != newFilter.name" style="min-width:200px;" [items]="newFilter.source"
+              bindLabel="name" [(ngModel)]="newFilter.value">
+            </ng-select>
+          </div>
+          <div *ngIf="newFilter.type == 'dateRange'">
+            <input type="date" class="form-control mr-1" [(ngModel)]="newFilter.startDate" ngbTooltip="Start Date">
+            <input type="date" class="form-control" [(ngModel)]="newFilter.endDate" ngbTooltip="End Date">
+          </div>
+        </div>
+        <button type="button" class="btn btn-info" (click)="addFilter(newFilter)">
+          Add
+        </button>
+      </div>
+      <div class="p-1 pt-2 mt-2" *ngIf="filters.length > 0" style="border-top: 1px solid #e5e5e5;">
+        <span class="badge badge-dark filter-label" ng-repeat="filter in filters" *ngFor="let filter of filters;">
+          {{filter.label}} is {{filter.valueDisplay}}
+          <a (click)="removeFilter(filter)" ngbTooltip="Remove">
+            <i class="mdi mdi-close pointer"></i>
+          </a>
+        </span>
+        <button type="button" class="btn btn-sm btn-light" (click)="clearFilters()" *ngIf="filters.length > 0">
+          Remove All</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="report" class="col-md-10 offset-md-1 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <button (click)="runReport()" type="button" class="btn btn-success pull-right">
+          Run Report
+        </button>
+        <h5 class="card-title mb-2">{{report.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{report.notes || 'No Description'}}</h6>
+        <p class="dashed-border mb-1"></p>
+        <div id="report" class="rptFrame text-center" *ngIf="pdfUrl">
+          <iframe [src]="pdfUrl | safe : 'resourceUrl'" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

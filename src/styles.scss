@@ -1,0 +1,157 @@
+/* You can add global styles to this file, and also import other style files */
+
+$bg-color: #fbfbfb;
+
+body {
+  font-family: "ProximaNova", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif";
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: $bg-color;
+  padding-top: 55px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  padding-top: 100px;
+  padding-right: 10px;
+  border-left: 1px solid $bg-color;
+  border-right: 1px solid $bg-color;
+  -ms-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #d0cece;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+  -webkit-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  -ms-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #F5F5F5;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.page {
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-right: 15px;
+  margin-bottom: 25px;
+}
+
+.page-title h5 {
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.page-title hr {
+  margin: 0px !important;
+}
+
+.page-title p {
+  margin-bottom: 5px;
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.num_col_1 {
+  width: 40px;
+}
+
+.grid-control {
+  margin-bottom: 10px;
+}
+
+
+.side-form {
+  padding-right: 10px !important;
+
+  .card-subtitle {
+    font-family: "ProximaNovaLight"
+  }
+
+  .close-btn {
+    margin-top: -15px;
+    margin-right: -15px;
+    float: right;
+  }
+}
+
+
+div.block-ui-wrapper {
+  background-color: #fbfbfbb3;
+
+  .loader {
+    border-color: #fff;
+    border-left-color: #ababab;
+  }
+}
+
+div.block-ui-spinner .message {
+  color: #3c3c3c;
+}
+
+
+.arr-right .breadcrumb-item+.breadcrumb-item::before {
+  content: "›";
+  vertical-align: top;
+  color: #408080;
+  font-size: 35px;
+  line-height: 18px;
+}
+
+.breadcrumb-clean {
+  border: 1px solid #e9ecef;
+  background-color: $bg-color;
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #dc3545;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+}
+
+router-outlet {
+  display: none;
+}
+
+.router-container {
+  position: relative;
+}
+
+.router-container>* {
+  display: block;
+}
+
+
+.btn-light {
+  border: 1px solid #ced4da;
+}

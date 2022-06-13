@@ -1,0 +1,76 @@
+<div class="page">
+  <div class="page-title">
+    <h5>User Roles</h5>
+    <p class="d-block text-muted">Create roles by grouping application permission to suite a user profile.</p>
+  </div>
+  <br>
+  <div class="grid-control">
+    <button class="btn btn-primary" (click)="openForm()"><i class="mdi mdi-account-plus"></i> Add Role</button>
+  </div>
+  <div class="row no-gutters" *blockUI="'loading'">
+    <div class="col-md-4 side-form" *ngIf="showForm">
+      <form [formGroup]="roleForm" (ngSubmit)="save(roleForm.value)">
+        <div class="card">
+          <div class="card-body">
+            <button class="btn btn-link close-btn" data-toggle="tooltip" data-placement="top" title="Close Form"
+              (click)="closeForm()"><i class="mdi mdi-cancel"></i></button>
+            <h6 class="card-subtitle mb-2">Enter role details</h6>
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name" required
+                [validate-form-control]="roleForm.controls.name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Default View</label>
+              <ng-select [items]="routes" formControlName="defaultView">
+              </ng-select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="permissions">Permissions</label>
+              <ng-select [items]="privileges" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
+                bindLabel="name" placeholder="Select Permissions" formControlName="privileges" required
+                [validate-form-control]="roleForm.controls.privileges" error-message="This is required">
+              </ng-select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="notes">Description</label>
+              <textarea class="form-control" id="notes" rows="3" formControlName="description"></textarea>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-success me-2">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+            <button type="button" class="btn btn-danger pull-right" (click)="delete(roleForm.value)"
+              *ngIf="roleForm.value.id">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div [ngClass]="showForm ? 'col-md-8' : 'col-md-12'" class="side-grid">
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive-sm">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr class="table-secondary">
+                  <th scope="col" class="num_col_1">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Default View</th>
+                  <th scope="col">Permissions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let role of roles; let i = index;" class="pointer" (click)="openForm(role)">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{role.name}}</td>
+                  <td>{{role.defaultView}}</td>
+                  <td>{{role.privileges?.length}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
